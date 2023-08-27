@@ -1,22 +1,22 @@
-
-import React,{useContext} from "react";
+import React, { useState } from "react";
 import './../styles/App.css';
-import global from "../context/globalcontext";
+
+
 const App = () => {
-  let {sum,set}= useContext(global)
-  console.log(sum)
-  function adddata(event){
-    console.log(event)
-    set([...sum,Number(event.target.value)])
+
+  let [sum,setSum] = useState(0);
+
+  const updateSum = (e)=>{
+    let value = parseFloat(e.target.value);
+    setSum((prevState)=> prevState + value);
   }
+
   return (
     <div>
+        {/* Do not remove the main div */}
         <h1>Sum Calculator</h1>
-        <input type='number' onChange={adddata}></input>
-         <p>Sum: {
-          sum.reduce((accu,element)=>accu+element,0)
-          }
-          </p>
+        <input type="number" onChange={(e)=>updateSum(e)}/>
+        <p>Sum: {sum}</p>
     </div>
   )
 }
